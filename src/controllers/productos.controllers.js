@@ -15,6 +15,23 @@ export const listaProductos = async (req, res) => {
   }
 }
 
+export const ObtenerProductos = async (req, res) => {
+    try {
+      //obtener el parametro
+      console.log(req.params.id)
+      //buscar en la base de datos el producto que coincide con el parametro
+      const productoBuscado = await Producto.findById(req.params.id)
+      //responder al frontend
+      res.status(200).json(productoBuscado)
+    } catch (error) {
+      console.log(error)
+      //enviar una respuesta al frontend
+      res.status(404).json({
+        mensaje: 'Error al buscar el producto',
+      })
+    }
+  }
+
 export const crearProducto = async (req, res) => {
   try {
     // console.log(req.body)
