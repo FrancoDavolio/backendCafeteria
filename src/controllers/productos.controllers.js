@@ -1,12 +1,23 @@
 import Producto from '../models/producto'
 
-export const listaProductos = (req, res) => {
-  res.send('hola desde el backend en la peticion get')
+export const listaProductos = async (req, res) => {
+  try {
+    //buscar los productos
+    const productos = await Producto.find()
+    //responder al frontend con el arreglo de productos
+    res.status(200).json(productos)
+  } catch (error) {
+    console.log(error)
+    //enviar una respuesta al frontend
+    res.status(404).json({
+      mensaje: 'Error al buscar el producto',
+    })
+  }
 }
 
 export const crearProducto = async (req, res) => {
   try {
-    console.log(req.body)
+    // console.log(req.body)
     //validar los datos del objetos
     //guardar el objeto en la base de datos
     const productoNuevo = new Producto(req.body)
