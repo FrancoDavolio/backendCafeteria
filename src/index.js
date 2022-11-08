@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
 import path from 'path'
+import productoRouter from './routes/productos.routes'
 //llamar a la conexion a la db
 import './database'
 
@@ -24,8 +25,7 @@ app.use(morgan('dev'))
 //cargar un archivo estactico
 app.use(express.static(path.join(__dirname, '../public')))
 console.log(path.join(__dirname, '../public'))
-
 //rutas
-app.get('/prueba', (req, res) => {
-    res.send('hola desde el backend en la peticion get')
-})
+//http://localhost:4000/apicafe/prueba
+app.use('/apicafe',productoRouter)
+
